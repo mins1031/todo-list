@@ -53,4 +53,10 @@ public class Todo {
     public static Todo createTodo(String name, Boolean completed, LocalDateTime completedAt, User user) {
         return new Todo(name, completed, completedAt, user);
     }
+
+    public void updateTodo(String name, Boolean completed, LocalDateTime completedAt) {
+        this.name = name;
+        this.completed = completed;
+        this.completedAt = completedAt;
+    }
 }
