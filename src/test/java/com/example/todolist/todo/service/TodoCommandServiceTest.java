@@ -2,7 +2,7 @@ package com.example.todolist.todo.service;
 
 import com.example.todolist.todo.domain.Todo;
 import com.example.todolist.todo.dto.TodoSaveOrUpdateRequest;
-import com.example.todolist.todo.dto.TodoSaveOrUpdateResponse;
+import com.example.todolist.todo.dto.TodoDetailResponse;
 import com.example.todolist.todo.repository.TodoRepository;
 import com.example.todolist.todo.repository.UserRepository;
 import org.assertj.core.api.Assertions;
@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class TodoCommandServiceTest {
@@ -34,7 +32,7 @@ class TodoCommandServiceTest {
         TodoSaveOrUpdateRequest todoSaveOrUpdateRequest = new TodoSaveOrUpdateRequest("name", false);
 
         //when
-        TodoSaveOrUpdateResponse todoSaveOrUpdateResponse = todoCommandService.saveTodo(todoSaveOrUpdateRequest);
+        TodoDetailResponse todoSaveOrUpdateResponse = todoCommandService.saveTodo(todoSaveOrUpdateRequest);
 
         //then
         Assertions.assertThat(todoSaveOrUpdateResponse.getId()).isNotNull();
@@ -53,7 +51,7 @@ class TodoCommandServiceTest {
         TodoSaveOrUpdateRequest todoSaveOrUpdateRequest = new TodoSaveOrUpdateRequest("name", true);
 
         //when
-        TodoSaveOrUpdateResponse todoSaveOrUpdateResponse = todoCommandService.saveTodo(todoSaveOrUpdateRequest);
+        TodoDetailResponse todoSaveOrUpdateResponse = todoCommandService.saveTodo(todoSaveOrUpdateRequest);
 
         //then
         Assertions.assertThat(todoSaveOrUpdateResponse.getId()).isNotNull();
@@ -72,7 +70,7 @@ class TodoCommandServiceTest {
         TodoSaveOrUpdateRequest todoSaveOrUpdateRequest = new TodoSaveOrUpdateRequest("updatedName", true);
 
         //when
-        TodoSaveOrUpdateResponse todoSaveOrUpdateResponse = todoCommandService.updateTodo(todo.getId(), todoSaveOrUpdateRequest);
+        TodoDetailResponse todoSaveOrUpdateResponse = todoCommandService.updateTodo(todo.getId(), todoSaveOrUpdateRequest);
 
         //then
         Assertions.assertThat(todoSaveOrUpdateResponse.getId()).isNotNull();

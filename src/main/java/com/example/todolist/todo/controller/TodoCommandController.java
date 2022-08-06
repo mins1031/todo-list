@@ -1,7 +1,7 @@
 package com.example.todolist.todo.controller;
 
 import com.example.todolist.todo.dto.TodoSaveOrUpdateRequest;
-import com.example.todolist.todo.dto.TodoSaveOrUpdateResponse;
+import com.example.todolist.todo.dto.TodoDetailResponse;
 import com.example.todolist.todo.service.TodoCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,24 +20,24 @@ public class TodoCommandController {
     private final TodoCommandService todoCommandService;
 
     @PostMapping(TodoCommandControllerPath.TODO_SAVE_PATH)
-    public ResponseEntity<TodoSaveOrUpdateResponse> saveTodo(
+    public ResponseEntity<TodoDetailResponse> saveTodo(
             @RequestBody TodoSaveOrUpdateRequest todoSaveOrUpdateRequest
     ) {
-        TodoSaveOrUpdateResponse todoSaveOrUpdateResponse = todoCommandService.saveTodo(todoSaveOrUpdateRequest);
-        return new ResponseEntity(todoSaveOrUpdateResponse, HttpStatus.CREATED);
+        TodoDetailResponse todoDetailResponse = todoCommandService.saveTodo(todoSaveOrUpdateRequest);
+        return new ResponseEntity(todoDetailResponse, HttpStatus.CREATED);
     }
 
     @PutMapping(TodoCommandControllerPath.TODO_UPDATE_PATH)
-    public ResponseEntity<TodoSaveOrUpdateResponse> updateTodo(
+    public ResponseEntity<TodoDetailResponse> updateTodo(
             @PathVariable Integer todoId,
             @RequestBody TodoSaveOrUpdateRequest todoSaveOrUpdateRequest
     ) {
-        TodoSaveOrUpdateResponse todoSaveOrUpdateResponse = todoCommandService.updateTodo(todoId, todoSaveOrUpdateRequest);
-        return new ResponseEntity(todoSaveOrUpdateResponse, HttpStatus.OK);
+        TodoDetailResponse todoDetailResponse = todoCommandService.updateTodo(todoId, todoSaveOrUpdateRequest);
+        return new ResponseEntity(todoDetailResponse, HttpStatus.OK);
     }
 
     @DeleteMapping(TodoCommandControllerPath.TODO_DELETE_PATH)
-    public ResponseEntity<TodoSaveOrUpdateResponse> deleteTodo(@PathVariable Integer todoId) {
+    public ResponseEntity<TodoDetailResponse> deleteTodo(@PathVariable Integer todoId) {
         todoCommandService.deleteTodo(todoId);
         return new ResponseEntity(HttpStatus.OK);
     }

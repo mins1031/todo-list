@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class TodoSaveOrUpdateResponse {
+public class TodoDetailResponse {
     private Integer id;
     private String name;
     private Boolean completed;
@@ -19,8 +19,8 @@ public class TodoSaveOrUpdateResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static TodoSaveOrUpdateResponse of(Todo savedTodo) {
-        return new TodoSaveOrUpdateResponse(
+    public static TodoDetailResponse of(Todo savedTodo) {
+        return new TodoDetailResponse(
                 savedTodo.getId(),
                 savedTodo.getName(),
                 savedTodo.getCompleted(),
