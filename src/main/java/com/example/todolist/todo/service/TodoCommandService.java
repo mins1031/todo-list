@@ -44,6 +44,12 @@ public class TodoCommandService {
         return TodoSaveOrUpdateResponse.of(todo);
     }
 
+    @Transactional
+    public void deleteTodo(Integer todoId) {
+        todoRepository.findById(todoId).orElseThrow(NotFoundTodoException::new);
+        todoRepository.deleteById(todoId);
+    }
+
     private LocalDateTime checkTodoCompleted(Boolean completed, Todo todo) {
         if (todo == null) {
             if (completed) {

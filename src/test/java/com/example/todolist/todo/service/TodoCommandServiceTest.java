@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -79,5 +81,19 @@ class TodoCommandServiceTest {
         Assertions.assertThat(todoSaveOrUpdateResponse.getCompletedAt()).isNotNull();
         Assertions.assertThat(todoSaveOrUpdateResponse.getCreatedAt()).isNotNull();
         Assertions.assertThat(todoSaveOrUpdateResponse.getUpdatedAt()).isNotNull();
+    }
+
+    @DisplayName("투두를 삭제할 수 있다.")
+    @Test
+    public void 투두_삭제_테스트() {
+        //given
+        Todo todo = todoRepository.save(Todo.createTodo("name", false, null, null));
+
+        //when
+        todoCommandService.deleteTodo(todo.getId());
+
+        //then
+        List<Todo> allTodos = todoRepository.findAll();
+        Assertions.assertThat(allTodos).hasSize(0);
     }
 }

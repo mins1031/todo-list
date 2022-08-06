@@ -6,6 +6,7 @@ import com.example.todolist.todo.service.TodoCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,6 +33,12 @@ public class TodoCommandController {
             @RequestBody TodoSaveOrUpdateRequest todoSaveOrUpdateRequest
     ) {
         TodoSaveOrUpdateResponse todoSaveOrUpdateResponse = todoCommandService.updateTodo(todoId, todoSaveOrUpdateRequest);
-        return new ResponseEntity(todoSaveOrUpdateResponse, HttpStatus.CREATED);
+        return new ResponseEntity(todoSaveOrUpdateResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping(TodoCommandControllerPath.TODO_DELETE_PATH)
+    public ResponseEntity<TodoSaveOrUpdateResponse> deleteTodo(@PathVariable Integer todoId) {
+        todoCommandService.deleteTodo(todoId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
