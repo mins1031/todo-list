@@ -26,7 +26,6 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //TODO 이번기회에 CreatedDate LastModifiedDate 어노테이션 파악할것
     @CreatedDate
     private LocalDateTime createdAt;
 
@@ -39,7 +38,6 @@ public class Todo {
 
     private LocalDateTime completedAt;
 
-//  TODO  @NotNull 추가해애함
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

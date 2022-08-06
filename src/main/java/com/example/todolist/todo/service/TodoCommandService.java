@@ -5,7 +5,6 @@ import com.example.todolist.todo.dto.TodoSaveOrUpdateRequest;
 import com.example.todolist.todo.dto.TodoDetailResponse;
 import com.example.todolist.todo.exception.NotFoundTodoException;
 import com.example.todolist.todo.repository.TodoRepository;
-import com.example.todolist.todo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +15,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class TodoCommandService {
     private final TodoRepository todoRepository;
-    private final UserRepository userRepository;
 
     @Transactional
     public TodoDetailResponse saveTodo(TodoSaveOrUpdateRequest todoSaveOrUpdateRequest) {
