@@ -2,7 +2,7 @@ package com.example.todolist.todo.service;
 
 import com.example.todolist.todo.domain.Todo;
 import com.example.todolist.todo.dto.TodoSaveOrUpdateRequest;
-import com.example.todolist.todo.dto.TodoSaveOrUpdateResponse;
+import com.example.todolist.todo.dto.TodoDetailResponse;
 import com.example.todolist.todo.exception.NotFoundTodoException;
 import com.example.todolist.todo.repository.TodoRepository;
 import com.example.todolist.todo.repository.UserRepository;
@@ -19,7 +19,7 @@ public class TodoCommandService {
     private final UserRepository userRepository;
 
     @Transactional
-    public TodoSaveOrUpdateResponse saveTodo(TodoSaveOrUpdateRequest todoSaveOrUpdateRequest) {
+    public TodoDetailResponse saveTodo(TodoSaveOrUpdateRequest todoSaveOrUpdateRequest) {
         Todo todo = Todo.createTodo(
                 todoSaveOrUpdateRequest.getTodoName(),
                 todoSaveOrUpdateRequest.getTodoCompleted(),
@@ -29,11 +29,11 @@ public class TodoCommandService {
 
         Todo savedTodo = todoRepository.save(todo);
 
-        return TodoSaveOrUpdateResponse.of(savedTodo);
+        return TodoDetailResponse.of(savedTodo);
     }
 
     @Transactional
-    public TodoSaveOrUpdateResponse updateTodo(Integer todoId, TodoSaveOrUpdateRequest todoSaveOrUpdateRequest) {
+    public TodoDetailResponse updateTodo(Integer todoId, TodoSaveOrUpdateRequest todoSaveOrUpdateRequest) {
         Todo todo = todoRepository.findById(todoId).orElseThrow(NotFoundTodoException::new);
         todo.updateTodo(
                 todoSaveOrUpdateRequest.getTodoName(),
@@ -41,7 +41,7 @@ public class TodoCommandService {
                 checkTodoCompleted(todoSaveOrUpdateRequest.getTodoCompleted(), todo)
         );
 
-        return TodoSaveOrUpdateResponse.of(todo);
+        return TodoDetailResponse.of(todo);
     }
 
     @Transactional
